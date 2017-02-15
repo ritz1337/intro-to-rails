@@ -11,8 +11,7 @@ __Routes__  | __Controller__ | __Model__   | __Migrations__
 Tim         | Andrew         | Kora        | Qian
 Jake        | Ritwik         | Barret      | Justin
 Bao         | Michelle       | An          | Kris
-Dakota      | Kris           | Lacey       | Abi
-Brad        |                |             |
+Dakota      | Brad           | Lacey       | Abi
     
 # Routes
 
@@ -57,13 +56,15 @@ http://guides.rubyonrails.org/active_record_migrations.html
 
 # Development
 
+http://edgeguides.rubyonrails.org/api_app.html
+
 Squad 1 | Squad 2  | Squad 3 | Squad 4
 :--     | :--      | :--     | :-- 
 Tim     | Andrew   | Kora    | Qian
 Ritwik  | Barret   | Justin  | Jake
 An      | Kris     | Boa     | Michelle
-Abi     | Dakotaa  | Kris    | Lacey
-        |          |         | Brad
+Abi     | Dakotaa  | Brad    | Lacey
+        |          |         | 
 
 Create a new Rails app called "dead_letter_app" that produces a JSON api.
 
@@ -71,14 +72,21 @@ Create a new Rails app called "dead_letter_app" that produces a JSON api.
 $ rails new dead_letter_app --api --database=postgresql
 ```
 
-Data Model
+# The Data Model
+
+Scaffold a Letter resource
 
 A Letter should have a 
     - "to_address", 
     - "from_address", 
     - "message", 
-    - "stamp_price", and 
     - "is_read" 
+
+Create some seed data in `db/seeds.rb`
+
+Write a migration to set "is_read" to default to "false"
+
+Create an "index.html" page that gets served from "public"
 
 When a user visits "/" 
     - they should see a form to create a new letter.
@@ -100,4 +108,5 @@ Provide a button for each Letter to delete it.
 
 When a user clicks "Destroy"
     - use jQuery's ajax or Fetch to destroy that letter
+
 
