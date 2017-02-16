@@ -25,6 +25,7 @@
   <script>
    var $createBtn = $('.createbtn')
    var $viewAll = $('.viewall')
+   var $markRead = $('.markread')
 // data key matches letter_params require key in letters_controller.rb
 // line 49
 // sub-keys match permit keys on same line
@@ -49,13 +50,28 @@
     $.get('/letters', function(res) {
       var html = "<ul>"
       res.forEach(function(letter) {
-        html += "<li>To: " + letter.to_address + "</li><li>From: " +
-        letter.from_address + "</li><li>Message: " + letter.message + "</li><br><br>"
+        html += "<li id='" + letter.id + "'>To: " + letter.to_address + "</li><li>From: " +
+        letter.from_address + "</li><li>Message: " + letter.message + "</li><button class='markread' id=" + letter.id + ">Mark As Read</button><br><br>"
       })
       html += "</ul>"
       $('.allletters').append(html);
     })
   })
+
+function markAsRead (evt) {
+  console.log('clicked');
+  var letterID = $(this).attr('id')
+  $.ajax ({
+    method: 'put',
+    url: `/letters/${letterID}`,
+    data: {
+      letter: {
+        is_read: true
+      }
+    }
+  })
+}
+  $markRead.on('click', markAsRead)
   </script>
 </body>
 </html>
