@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  to_address: MyString
+  from_address: MyString
+  message: MyString
+  is_read: MyString
+
+two:
+  to_address: MyString
+  from_address: MyString
+  message: MyString
+  is_read: MyString

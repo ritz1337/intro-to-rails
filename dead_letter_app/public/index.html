@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Letters</title>
+</head>
+<body>
+  <div>
+    <input class="tofield" name="to" placeholder="to">
+    <input class="fromfield" name="from" placeholder="from">
+    <input class="messagefield" name="message" placeholder="message">
+    <button class="createbtn">Create</button>
+  </div>
+
+  <div>
+    <button class="viewall">View All</button>
+  </div>
+  <div class="allletters">
+
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+  <script>
+   var $createBtn = $('.createbtn')
+   var $viewAll = $('.viewall')
+// data key matches letter_params require key in letters_controller.rb
+// line 49
+// sub-keys match permit keys on same line
+
+  $createBtn.on('click', function(evt) {
+    var $to = $('.tofield').val();
+    var $from = $('.fromfield').val();
+    var $msg = $('.messagefield').val();
+    var data = {
+      letter: {
+        to_address: $to,
+        from_address: $from,
+        message: $msg
+      }
+    }
+    $.post('/letters', data, function(res){
+      console.log(res);
+    })
+  })
+
+  $viewAll.on('click', function(evt) {
+    $.get('/letters', function(res) {
+      var html = "<ul>"
+      res.forEach(function(letter) {
+        html += "<li>To: " + letter.to_address + "</li><li>From: " +
+        letter.from_address + "</li><li>Message: " + letter.message + "</li><br><br>"
+      })
+      html += "</ul>"
+      $('.allletters').append(html);
+    })
+  })
+  </script>
+</body>
+</html>
